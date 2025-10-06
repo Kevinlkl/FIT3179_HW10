@@ -1,0 +1,63 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 600,
+    "title": "Evolution of Malaysia's Economic Indicators Over Time",
+    "data": {
+        "url": "https://raw.githubusercontent.com/Kevinlkl/FIT3179_HW10/main/malaysia%20economic%20dataset.csv"
+    },
+    "transform": [
+        {
+            "timeUnit": "yearmonth",
+            "field": "date",
+            "as": "date_parsed"
+        },
+        {
+            "filter": "month(datum.date) == 0"
+        },
+        {
+            "fold": ["leading", "coincident", "lagging", "leading_diffusion", "coincident_diffusion"],
+            "as": ["indicator", "value"]
+        }
+    ],
+    "mark": {
+        "type": "line",
+        "point": false,
+        "strokeWidth": 2
+    },
+    "encoding": {
+        "x": {
+            "field": "date",
+            "type": "temporal",
+            "title": "Year",
+            "axis": {
+                "format": "%Y"
+            }
+        },
+        "y": {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Index Value"
+        },
+        "color": {
+            "field": "indicator",
+            "type": "nominal",
+            "title": "Economic Indicator",
+            "scale": {
+                "domain": ["leading", "coincident", "lagging", "leading_diffusion", "coincident_diffusion"],
+                "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd"]
+            },
+            "legend": {
+                "orient": "right",
+                "titleFontSize": 12,
+                "labelFontSize": 11,
+                "labelExpr": "datum.value == 'leading' ? 'Leading Index' : datum.value == 'coincident' ? 'Coincident Index' : datum.value == 'lagging' ? 'Lagging Index' : datum.value == 'leading_diffusion' ? 'Leading Diffusion' : 'Coincident Diffusion'"
+            }
+        },
+        "tooltip": [
+            {"field": "date", "type": "temporal", "title": "Date", "format": "%B %Y"},
+            {"field": "indicator", "type": "nominal", "title": "Indicator"},
+            {"field": "value", "type": "quantitative", "title": "Value", "format": ".1f"}
+        ]
+    }
+}
