@@ -20,6 +20,16 @@
             "as": ["indicator", "value"]
         }
     ],
+    "params": [
+        {
+            "name": "indicator_highlight",
+            "select": {
+                "type": "point",
+                "fields": ["indicator"]
+            },
+            "bind": "legend"
+        }
+    ],
     "mark": {
         "type": "line",
         "point": false,
@@ -53,6 +63,10 @@
                 "labelFontSize": 11,
                 "labelExpr": "datum.value == 'leading' ? 'Leading Index' : datum.value == 'coincident' ? 'Coincident Index' : datum.value == 'lagging' ? 'Lagging Index' : datum.value == 'leading_diffusion' ? 'Leading Diffusion' : 'Coincident Diffusion'"
             }
+        },
+        "opacity": {
+            "condition": {"param": "indicator_highlight", "value": 0.8},
+            "value": 0.2
         },
         "tooltip": [
             {"field": "date", "type": "temporal", "title": "Date", "format": "%B %Y"},
