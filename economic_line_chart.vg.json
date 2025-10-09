@@ -38,6 +38,7 @@
             ],
             "mark": {
                 "type": "line",
+                "interpolate": "linear",
                 "point": false,
                 "strokeWidth": 2
             },
@@ -103,9 +104,9 @@
                 "color": {
                     "condition": {
                         "test": "datum.text == '1990s Economic Growth Period'",
-                        "value": "#2ca02c"
+                        "value": "black"
                     },
-                    "value": "#ff7f0e"
+                    "value": "black"
                 }
             }
         },
