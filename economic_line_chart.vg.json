@@ -16,11 +16,11 @@
             "filter": "month(datum.date) == 0"
         },
         {
-            "fold": ["leading", "coincident", "lagging", "leading_diffusion", "coincident_diffusion"],
+            "fold": ["leading", "coincident", "lagging"],
             "as": ["indicator", "value"]
         },
         {
-            "calculate": "datum.indicator == 'leading' ? 'Trend prediction of economic activity' : datum.indicator == 'coincident' ? 'Current economic state' : datum.indicator == 'lagging' ? 'Confirms economic trends after they occur' : datum.indicator == 'leading_diffusion' ? 'Percentage of leading indicators rising' : 'Percentage of coincident indicators rising (>50% = expansion ahead)'",
+            "calculate": "datum.indicator == 'leading' ? 'Trend prediction of economic activity' : datum.indicator == 'coincident' ? 'Current economic state' : datum.indicator == 'lagging' ? 'Confirms economic trends after they occur' : ''",
             "as": "description"
         }
     ],
@@ -54,21 +54,21 @@
                 "y": {
                     "field": "value",
                     "type": "quantitative",
-                    "title": "Index Value"
+                    "title": "Index Value (Unitless)"
                 },
                 "color": {
                     "field": "indicator",
                     "type": "nominal",
                     "title": "Economic Indicator",
                     "scale": {
-                        "domain": ["leading", "coincident", "lagging", "leading_diffusion", "coincident_diffusion"],
-                        "range": ["#CC79A7", "#0072B2", "#009E73", "#E69F00", "#00BFC4"]
+                        "domain": ["leading", "coincident", "lagging"],
+                        "range": ["#CC79A7", "#0072B2", "#009E73"]
                     },
                     "legend": {
                         "orient": "right",
                         "titleFontSize": 12,
                         "labelFontSize": 11,
-                        "labelExpr": "datum.value == 'leading' ? 'Leading Index' : datum.value == 'coincident' ? 'Coincident Index' : datum.value == 'lagging' ? 'Lagging Index' : datum.value == 'leading_diffusion' ? 'Leading Diffusion' : 'Coincident Diffusion'"
+                        "labelExpr": "datum.value == 'leading' ? 'Leading Index' : datum.value == 'coincident' ? 'Coincident Index' : 'Lagging Index'"
                     }
                 },
                 "opacity": {
@@ -78,7 +78,7 @@
                 "tooltip": [
                     {"field": "date", "type": "temporal", "title": "Date", "format": "%B %Y"},
                     {"field": "indicator", "type": "nominal", "title": "Indicator"},
-                    {"field": "value", "type": "quantitative", "title": "Value", "format": ".1f"},
+                    {"field": "value", "type": "quantitative", "title": "Value (unitless)", "format": ".1f"},
                     {"field": "description", "type": "nominal", "title": "Description"}
                 ]
             }
