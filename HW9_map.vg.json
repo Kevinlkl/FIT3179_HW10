@@ -56,6 +56,16 @@
         "stroke": "white",
         "strokeWidth": 1
       },
+      "params": [
+        {
+          "name": "hover",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
       "encoding": {
         "color": {
           "field": "ep_ratio",
@@ -68,6 +78,22 @@
           "legend": {
             "title": "Employment Ratio (%)"
           }
+        },
+        "stroke": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": "#333333"
+          },
+          "value": "white"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover",
+            "empty": false,
+            "value": 3
+          },
+          "value": 1
         },
         "tooltip": [
           {"field": "properties.name", "type": "nominal", "title": "State"},
